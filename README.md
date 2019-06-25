@@ -1,8 +1,9 @@
+
+![markdown]("https://img.alicdn.com/tfs/TB11ojWRXXXXXafaFXXXXXXXXXX-190-27.png")
+
 # R分析文件 
 
 **主要运用于快速构建基础淘宝报表数据的分析**
-
-![markdown]("https://img.alicdn.com/tfs/TB11ojWRXXXXXafaFXXXXXXXXXX-190-27.png")
 
 #### 当前list如下：
 + 列表二
@@ -18,3 +19,4 @@
     + TB_order：淘宝订单分析
     + TB_search：淘宝搜索分析
     + joinCSVorder：淘宝订单csv合并
+	
