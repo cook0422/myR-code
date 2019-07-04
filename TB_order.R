@@ -72,7 +72,7 @@ order.csv <- order.csv %>% left_join(x = order.csv,
 order.csv <- order.csv %>% left_join(x = order.csv,
                                      y = item.csv %>% filter(价格>100&订单状态=="交易成功") %>% 
                                        group_by(订单编号) %>% 
-                                       summarise(实际吊牌额 = sum(价格)),by="订单编号")
+                                       summarise(实际吊牌额 = sum(价格*购买数量)),by="订单编号")
 #替换所有NA值
 order.csv[is.na(order.csv)] <- 0
 #生成订单价格段
@@ -386,6 +386,10 @@ VIP.payRank <- quantile(unlist(VIP.table[which(VIP.table$消费金额 >=20),"消
 VIP.table <- VIP.table %>% mutate(消费等级 = cut(VIP.table$消费金额,c(-Inf,VIP.payRank,Inf),right = T))
 
 
+
+# 保存
+write.csv(VIP.table ,file = 'C:/Users/lenovo/Desktop/所有会员.csv')
+
 #会员消费金额段比例
 VIP.table %>% filter(消费金额 >=20) %>% group_by(消费等级) %>% 
   summarise(会员数 = length(买家会员名),
@@ -393,7 +397,6 @@ VIP.table %>% filter(消费金额 >=20) %>% group_by(消费等级) %>%
                金额占比 = sum(消费金额)/sum(VIP.table[which(VIP.table$消费金额 >=20),4]),
                数量占比 = length(买家会员名)/nrow(VIP.table[which(VIP.table$消费金额>=20),1]))
 #退款率会员等级
-
 write.csv(VIP.table %>% filter(最后下单时间 < '2019-01-01',最后下单时间 > '2018-06-01',消费金额 > 1699,商品退款率<0.45) %>% 
             select(买家会员名,消费金额,最后下单时间),file = 'C:/Users/lenovo/Desktop/千牛唤醒客户.csv')
 
